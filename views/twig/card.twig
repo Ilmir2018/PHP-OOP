@@ -1,0 +1,14 @@
+<div class="second">
+    <div class="one">
+        <h1> {{model.name}} </h1>
+        <p>{{model.discription}}</p>
+        {% if model.path != '' %}
+        <img width="300" src = "http://untitled/images/{{model.path}}" alt="sdfdsfsdf">
+        {% else %}
+        <div class="plug">Фото отсутствует</div>
+        {% endif %}
+    </div>
+    <div class="two">
+        <p>{{model.discription}}</p>
+    </div>
+</div>

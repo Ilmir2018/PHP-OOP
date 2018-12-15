@@ -1,0 +1,66 @@
+body {
+    margin: 0 auto;
+}
+.welcome {
+    text-align: center;
+    background-color: antiquewhite;
+}
+ul {
+    display: flex;
+    justify-content: center;
+}
+ul li {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    border: 1px solid #000; /* Рамка вокруг текста */
+    padding: 3px; /* Поля вокруг текста */
+    background-color: coral;
+    color: brown;
+}
+a {
+    text-decoration: none;
+}
+.product{
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+    margin: 0 10px;
+    border: solid 1px black;
+}
+
+.center{
+    background-color: azure;
+}
+
+footer {
+    text-align: center;
+    background-color: antiquewhite;
+}
+
+h3 {
+    color: blue;
+}
+
+p {
+    color: blueviolet;
+}
+
+.second{
+    display: flex;
+}
+
+.one{
+    margin: 0 0 0 30px;
+}
+
+.two{
+    margin: 100px 0 0 30px;
+}
+
+.order{
+    display: flex;
+}
+
+.form{
+    padding: 10px 0 0 20px;
+}

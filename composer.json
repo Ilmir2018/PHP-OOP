@@ -1,0 +1,22 @@
+{
+    "name": "ilmir/untitled",
+    "authors": [
+        {
+            "name": "Miro2018",
+            "email": "ilmir2007@inbox.ru"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.0",
+        "phpunit/phpunit": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "./",
+            "app\\config\\": "config/",
+            "app\\services\\": "services/",
+            "app\\model\\": "model/",
+            "app\\controllers\\": "controllers/"
+        }
+    }
+}
