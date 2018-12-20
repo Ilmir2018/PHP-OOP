@@ -12,16 +12,16 @@ use app\base\App;
 class BasketController extends Controller
 {
     public function actionIndex(){
+        //Подключаем сессию, созданную при авторизации или регистрации.
+        $session = App::call()->session;
         //Метод подключает сессию для передачи количества товаров по ключу.
         $data = $this->getData();
         //Если сессия существует есть права выполнять следующие операции
-        if (isset($_SESSION['user_name'])) {
+        if ($session->isset('user_name')) {
             //Мы делаем вызов на создание компонента request в методе  App.
             $request = App::call()->request;
             //Мы делаем вызов на создание компонента cart в методе  App.
             $cart = App::call()->cart;
-            //Мы делаем вызов на создание компонента session в методе  App.
-            $session = App::call()->session;
             //Через метод post созданный в классе App мы получаем значение из параметра при отрпавке запроса
             $submit = $request->post('submitDellBasket') ?? null;
             //Если была нажата кнопка со значением submitDellBasket

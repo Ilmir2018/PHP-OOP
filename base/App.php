@@ -20,7 +20,6 @@ use app\traits\TSingleton;
  * @property $request;
  * @property $session;
  */
-
 class App
 {
     //Подключение паттерна проектирования Singleton.
@@ -65,15 +64,15 @@ class App
         // верхний регистр
         $controllerClass = $this->config['controllerNamespace'] . "\\" . ucfirst($controllerName) . "Controller";
         //Проверяем существование вызываемого класса.
-        if (class_exists($controllerClass)){
+        if (class_exists($controllerClass)) {
             //Здесь происходит принятие решения, какой шаблонизатор мы используем. Мы создаём объект и помещаем его в
             //переменную $controller, чтобы потом от этого объекта вызвать метод для подгрузки шаблона.
             $controller = new $controllerClass(new \app\services\renderers\TemplateRenderer());
             //Мы вызваем метод run который задан у нас в контроллере для подгрузки и отображения шаблонов.
             //В него мы помещаем то имя которое прописывается в адресной строке или задаётся по умаолчанию
             //после чего происходит подгрузка шаблона.
-                $controller->run($actionName);
-        }else{
+            $controller->run($actionName);
+        } else {
             //Иначе мы вызываем сообщение об ошибке если метод run сработал не правильно.
             echo '404';
         }
@@ -89,13 +88,13 @@ class App
     public function createComponent($key)
     {
         //Ищем в массиве config  компонент по ключу
-        if(isset($this->config['components'][$key])){
+        if (isset($this->config['components'][$key])) {
             //В переменную помещаем элемент компонента из конфига.
             $params = $this->config['components'][$key];
             //В переменную помещаем подмассив элемента с ключом class.
             $class = $params['class'];
             //Если такой класс существует
-            if (class_exists($class)){
+            if (class_exists($class)) {
                 //Удаляем копонент класс, потому что ни в одном конструкторе такого параметра не будет.
                 unset($params['class']);
                 //Чтобы получить данные о классе мы создаём специальный класс в который кладём экземпляр нашего объекта.
@@ -103,10 +102,10 @@ class App
                 //Метод позволяет создать новый объект от класса котрый мы указали и передать параметры которые
                 // в конструктор пойдут. В нашем случае эти параметры есть только в компоненте db.
                 return $reflection->newInstanceArgs($params);
-            }else{
+            } else {
                 throw new \Exception("Не определён класс компонента!");
             }
-        }else{
+        } else {
             throw new \Exception("Компонент {$key} не найден");
         }
     }

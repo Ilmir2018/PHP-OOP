@@ -66,10 +66,6 @@ class Request extends Controller
             $this->params['get'] = $_GET;
             $this->params['post'] = $_POST;
         }
-        else{
-            //Делаем эксепшен.
-            throw new \Exception("Неправильный запрос!");
-        }
     }
 
     //Метод возвращает готовую строку образованную в parseRequest в методе App.

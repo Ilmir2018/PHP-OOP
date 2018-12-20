@@ -13,12 +13,13 @@ use app\base\App;
 class OrderController extends Controller
 {
     public $id;
+
     public function actionIndex()
     {
+        //Включаем сессию
         $session = App::call()->session;
-        //Подключаем сессию, созданную при авторизации или регистрации.
-        $session->get('user_name');
-        if (isset($_SESSION['user_name'])) {
+        //Подключаем сессия создаваемая при авторизации или регистрации существует делаем следующее.
+        if ($session->isset('user_name')) {
             //Мы делаем вызов на создание компонента request в методе  App.
             $request = App::call()->request;
             //Через метод post созданный в классе App мы получаем значение из параметра при отрпавке запроса
@@ -34,8 +35,7 @@ class OrderController extends Controller
                     $this->redirect('/basket');
                 }
                 //Удаляем из сессии сведения о корзине.
-                unset($_SESSION['basket']);
-                // unset($session->get('basket'));
+                $session->remove('basket');
                 //Если всё успешно добавляем в базу данных сведения о заказе.
                 App::call()->order->getOrder($this->id, $price);
                 //Делаем редирект на текущую страницу, чтобы не происходило повторной отпарвки при
@@ -53,9 +53,8 @@ class OrderController extends Controller
             //Отображаю все заказы в личном кабинете.
             $orders = App::call()->order->getOrders($session->get('id'));
             echo $this->render("order", ['orders' => $orders]);
-        }
-        //Если пользоваетль не авторизован его просят авторизоваться!
-        else{
+        } //Если пользоваетль не авторизован его просят авторизоваться!
+        else {
             echo $this->render("entitlement");
         }
     }

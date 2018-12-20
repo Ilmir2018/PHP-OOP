@@ -40,9 +40,6 @@ return [
         ],
         'cart' => [
             'class' => \app\model\Cart::class
-        ],
-        'hash' => [
-            'class' => \app\model\HashPassword::class
         ]
     ]
 ];

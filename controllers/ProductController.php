@@ -16,9 +16,9 @@ class ProductController extends Controller
     public function actionIndex()
     {
         //Подключаем сессию, созданную при авторизации или регистрации.
-        $this->getSession();
+        $session = App::call()->session;
         //Если сессия существует есть права выполнять следующие операции
-        if (isset($_SESSION['user_name'])) {
+        if ($session->isset('user_name')) {
             //Мы делаем вызов на создание компонента request в методе  App.
             $request = App::call()->request;
             //Мы делаем вызов на создание компонента cart в методе  App.
@@ -53,9 +53,9 @@ class ProductController extends Controller
     public function actionCard()
     {
         //Подключаем сессию, созданную при авторизации или регистрации.
-        $this->getSession();
+        $session = App::call()->session;
         //Если сессия существует есть права выполнять следующие операции
-        if (isset($_SESSION['user_name'])) {
+        if ($session->isset('user_name')) {
             //В переменную попадает значение полученное при выполнение запроса по ключу id.
             $id = App::call()->request->get('id');
             //В переменную попадает объект полученный по id.

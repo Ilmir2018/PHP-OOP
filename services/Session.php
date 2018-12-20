@@ -29,4 +29,16 @@ class Session
     {
         $_SESSION[$key] = $values;
     }
+
+    //Метод для удаления сессии.
+    function remove($key)
+    {
+        unset($_SESSION[$key]);
+    }
+
+    //Метод проверки существования сессии.
+    function isset($key)
+    {
+        return isset($_SESSION[$key]);
+    }
 }

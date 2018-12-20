@@ -14,9 +14,9 @@ class CommentController extends Controller
 {
     public function actionIndex()
     {
-        $this->getSession();
-        //Если сессия существует есть права выполнять следующие операции
-        if (isset($_SESSION['user_name'])) {
+        //Подключаем сессию, созданную при авторизации или регистрации.
+        $session = App::call()->session;
+        if ($session->isset('user_name')) {
             $request = App::call()->request;
             //Через метод post созданный в классе App мы получаем значение из параметра при отрпавке запроса
             $submit = $request->post('submitAddComment') ?? null;
