@@ -25,10 +25,10 @@
 <div class="container">
     <?php foreach ($products as $product):?>
         <div class="product">
-            <a href="/product/card/?id=<?=$product->id?>">
+            <a href="product/card?id=<?=$product->id?>">
                 <h1><?=$product->name?></h1>
                 <p><?=$product->name?></p>
-                <img width="300" height="200" src="images/small/<?= $product->path?>" alt="Фото">
+                <img width="300" height="200" src="images/small/<?= $product->img . ".png"?>" alt="Фото">
             </a>
         </div>
         <div class="form">

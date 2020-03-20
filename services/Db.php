@@ -1,16 +1,22 @@
 <?php
+
 namespace app\services;
 
-
+use app\traits\TSinglton;
 
 class Db
 {
-    //Конфигурация подключения к БД.
+
+    //Подключение к базе нужно делать только одно.
+    // Соединение нужно устанавливать в тот момент когда происходит
+    //первый запрос к базе.
     private $config = [
     ];
 
-    //Передаём данные для подключения к базе данных.
-    public function __construct($driver, $host, $login, $password, $database, $charset = "utf8", $port)
+    //Переменная для подключения к БД.
+    protected $conn = null;
+
+    public function __construct($driver, $host, $login, $password, $database, $charset, $port)
     {
         $this->config['driver'] = $driver;
         $this->config['host'] = $host;
@@ -19,55 +25,46 @@ class Db
         $this->config['database'] = $database;
         $this->config['charset'] = $charset;
         $this->config['port'] = $port;
-
     }
-    //Переменная для установки подключения к БД.
-    protected $connection = null;
 
-    //Функция для установки соединения
-    protected function getConnection(){
-        //Если соединения ещё нет, то устанавливаем его.
-        if(is_null($this->connection)){
-            //Создаём объект типа PDO и сохраняем его в $connection
-            //С помощью него мы подключаемся к базе.
-            $this->connection = new \PDO(
+    public function getConnection()
+    {
+        //Чтобы не устанавливать каждый раз новое соединение мы проверяем
+        //Если соединения ещ нет, то мы его устанавливаем, иначе я его просто возвращаю.
+        if (is_null($this->conn)) {
+            $this->conn = new \PDO(
                 $this->prepareDsnString(),
                 $this->config['login'],
                 $this->config['password']
-                //array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING)
             );
-            //Данные возвращаются как объект, мы устанавливаем атрибут внутри объекта.
-            $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+            $this->conn->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         }
-        //Иначе просто возвращаем его, чтобы не устанавливать соединение каждый раз обращаясь к базе данных.
-        return $this->connection;
+        //Если соедиенение уже установлено мы его просто возвращаем.
+        return $this->conn;
     }
 
-    //Инкапсулируем логику запроса
     private function query(string $sql, array $params = []){
         //Вызываем от объекта PDO метод prepare, он возвращает объект PDOStatement
-        //Этот объект содержит в себе подготовленный запрос. Он входит в библиотеку PDO.
         $pdoStatement = $this->getConnection()->prepare($sql);
         //Метод execute делает bind(привязку) автоматически
-        //Чтобы выполнить запрос в базу данных мы от объекта PDO который мы получили вызываем метод execute
         $pdoStatement->execute($params);
         //Возвращается объект подготовленного запроса.
         return $pdoStatement;
     }
 
-    //В этой функции передаём запрос и массив параметров чтобы проверит на совпадение логин и пароль в аутентификации.
     public function queryOne(string $sql, array $params = [])
     {
         return $this->query($sql, $params)->fetch();
     }
 
-    public function queryAll(string $sql, $classname, array $params = [])
+    public function queryAll(string $sql, array $params = [])
     {
         //fetchAll возвращает нам все данные из query в виде объекта.
-        return $this->query($sql, $params)->fetchAll(\PDO::FETCH_CLASS, get_class($classname));
+        return $this->query($sql, $params)->fetchAll(\PDO::FETCH_CLASS);
     }
-    //Метод выполняет запрос и возвращает класс.
-    public function queryObject($sql, $params = [], $class){
+
+    public function queryObject($sql, $params = [], $class)
+    {
         $smtp = $this->query($sql, $params);
         $smtp->setFetchMode(\PDO::FETCH_CLASS, $class);
         return $smtp->fetch();
@@ -85,14 +82,14 @@ class Db
         $this->query($sql, $params);
     }
 
-    //Вствляем элемент по id.
-    public function lastInsertId(){
+    public function lastInsertId()
+    {
         return $this->getConnection()->lastInsertId();
     }
 
-    //Возвращает строку для подключения к БД.
     private function prepareDsnString(): string
     {
+        //mysql:host=$host;dbname=$db;charset=$charset
         return sprintf("%s:host=%s;dbname=%s;charset=%s;port=%s",
             $this->config['driver'],
             $this->config['host'],
@@ -100,4 +97,5 @@ class Db
             $this->config['charset'],
             $this->config['port']);
     }
+
 }

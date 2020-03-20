@@ -12,11 +12,11 @@
 <body>
 <h1 class="welcome">Добро пожаловать на наш сайт!</h1>
 <nav>
-    <ul><a href="http://untitled/main">
+    <ul><a href="/">
             <li>Главная</li>
-        </a><a href="http://untitled/authentication">
+        </a><a href="http://study/authentication">
             <li>Войти</li>
-        </a><a href="http://untitled/registration">
+        </a><a href="http://study/registration">
             <li>Регистрация</li>
         </a></ul>
 </nav>

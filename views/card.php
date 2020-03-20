@@ -1,9 +1,9 @@
 <div class="second">
     <div class="one">
         <h1><?=$model->name?></h1>
-        <p><?=$model->discription?></p>
-        <?php if ($model->path != ''): ?>
-            <img width="300" src="http://<?= $_SERVER['HTTP_HOST'] ?>/images/<?=$model->path?>" alt="sdfdsfsdf">
+        <p><?=$model->description?></p>
+        <?php if ($model->img != ''): ?>
+            <img width="300" src="http://<?= $_SERVER['HTTP_HOST'] ?>/images/<?=$model->img . '.png'?>" alt="sdfdsfsdf">
         <?php else: ?>
             <div class="plug">Фото отсутствует</div>
         <?php endif; ?>
@@ -12,4 +12,5 @@
         <p><?=$model->discription?></p>
     </div>
 </div>
+
 

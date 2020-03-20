@@ -4,3 +4,6 @@
     <input type="password" name="password">
     <input type="submit" name="authentication">
 </form>
+<nav>
+<a href="http://study/recovery">Восстановление пароля</a>
+</nav>

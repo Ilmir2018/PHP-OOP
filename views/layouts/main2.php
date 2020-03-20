@@ -12,18 +12,18 @@
 <body>
 <h1 class="welcome">Добро пожаловать на наш сайт!</h1>
 <nav>
-    <ul><a href="/main">
+    <ul><a href="http://study/main">
             <li>Главная</li>
-        </a><a href="http://untitled/exit">
+        </a><a href="http://study/exit">
             <li>Выйти</li>
-        </a><a href="/product">
+        </a><a href="http://study/product">
             <li>Каталог товаров</li>
-        </a><a href="http://untitled/comment">
+        </a><a href="http://study/comment">
             <li>Комментарии</li>
-        </a><a href="http://untitled/order">
+        </a><a href="http://study/order">
             <li>Личный кабинет</li>
-        </a><a href="http://untitled/basket">
-            <li>Корзина(<?=$_SESSION['count']?>)</li>
+        </a><a href="http://<?= $_SERVER['HTTP_HOST'] ?>/basket">
+            <li>Корзина(<?=$session->get('count')?>)</li>
         </a></ul>
 </nav>
 <div class="center"><?=$content?></div>

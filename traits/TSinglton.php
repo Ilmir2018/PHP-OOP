@@ -1,8 +1,10 @@
 <?php
+
+
 namespace app\traits;
 
-//Паттерн проетироания - Синглтон.
-trait TSingleton
+
+trait TSinglton
 {
     protected static $instance = null;
     //Запрещаем создание конеструктора у объекта
@@ -12,15 +14,14 @@ trait TSingleton
     // Запрещаем создание __wakeup
     private function __wakeup(){}
 
-    //Метод отвечающий за создания объекта от клсса вызываемого класса для того чтобы
+    //Метод отвечающий для создания объекта от клсса Db для того чтобы
     //этот объект был один
     public static function getInstance(){
         //Если статическа переменная пустая, мы создаём текущее свойство.
         if (is_null(static::$instance)){
-            static::$instance = new static(); //new static() равноценен написанию new Db() например или зоднанию
-            //любого другого объекта;
+            static::$instance = new static(); //new static() равноценен написанию new Db();
         }
-        //Если  он уже создан, то он просто его вернёт.
+        //Еси  он уже создан, то он просто его вернёт.
         return static::$instance;
     }
 }

@@ -1,11 +1,9 @@
 <?php
-//Через конфигурацию приложение следит чтобы мы получали одни и те же объекты.
 return [
     'rootDir' => __DIR__ . "/../",
     'templatesDir' => __DIR__ . "/../views/",
-    'defaultController' => 'main',
+    'defaultController' => "main",
     'controllerNamespace' => "app\\controllers",
-    //конфигурации компонентов, они создаются при первом запросе и возвращается всегда один и тот же объект.
     'components' => [
         'db' => [
             'class' => \app\services\Db::class,
@@ -13,9 +11,9 @@ return [
             'host' => 'localhost',
             'login' => 'root',
             'password' => '',
-            'database' => 'litle_shop',
+            'database' => 'little_shop',
             'charset' => 'utf8',
-            'port' => '330'
+            'port'=> '3307'
         ],
         'request' => [
             'class' => \app\services\Request::class
@@ -26,20 +24,23 @@ return [
         'session' => [
             'class' => \app\services\Session::class
         ],
-        'repository' => [
-            'class' => \app\model\repositories\ProductRepository::class
-        ],
-        'user' => [
-            'class' => \app\model\repositories\UserRepository::class
-        ],
-        'comment' => [
-            'class' => \app\model\repositories\CommentRepository::class
+        'cart' => [
+            'class' => \app\models\Cart::class
         ],
         'order' => [
-            'class' => \app\model\repositories\OrderRepository::class
+           'class' => \app\models\repositories\OrderRepository::class
         ],
-        'cart' => [
-            'class' => \app\model\Cart::class
+        'comment' => [
+            'class' => \app\models\repositories\CommentRepository::class
+        ],
+        'user' => [
+            'class' => \app\models\repositories\UserRepository::class
+        ],
+        'product' => [
+            'class' => \app\models\repositories\ProductRepository::class
+        ],
+        'recovery' => [
+            'class' => \app\models\repositories\RecoveryRepository::class
         ]
     ]
 ];

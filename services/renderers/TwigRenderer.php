@@ -4,20 +4,19 @@
 namespace app\services\renderers;
 
 
-class TwigRenderer implements Irenderer
+class TwigRenderer implements IRenderer
 {
-    private $twig;
 
+    private $template;
     public function __construct()
     {
-        //Указываем путь к шаблонам.
-        $loader = new \Twig_Loader_Filesystem( TWIG_DIR);
-        //Инициализируем твиг
-        $this->twig = new \Twig_Environment($loader);
+        $loader = new \Twig\Loader\FilesystemLoader(TWIG_DIR);
+        $this->template = new \Twig\Environment($loader);
     }
 
     public function render($template, $params = [])
     {
-        return $this->twig->render($template . ".twig", $params);
+        echo $this->template->render($template . '.twig', $params);
     }
+
 }

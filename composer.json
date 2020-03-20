@@ -1,5 +1,5 @@
 {
-    "name": "ilmir/untitled",
+    "name": "ilmir/study",
     "authors": [
         {
             "name": "Miro2018",
@@ -7,16 +7,12 @@
         }
     ],
     "require": {
-        "twig/twig": "^2.0",
-        "phpunit/phpunit": "^7.4"
+        "twig/twig": "^3.0",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {
-            "app\\": "./",
-            "app\\config\\": "config/",
-            "app\\services\\": "services/",
-            "app\\model\\": "model/",
-            "app\\controllers\\": "controllers/"
+            "app\\": "./"
         }
     }
 }
