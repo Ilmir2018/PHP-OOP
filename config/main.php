@@ -40,7 +40,15 @@ return [
             'class' => \app\models\repositories\ProductRepository::class
         ],
         'recovery' => [
-            'class' => \app\models\repositories\RecoveryRepository::class
+            'class' => \app\models\repositories\RecoveryRepository::class,
+            'host' => 'localhost',
+            'SMTPAuth' => true,
+            'username' => 'admin',
+            'password' => 'qwerty',
+            'SMTPSecure' => 'ssl',
+            'port' => '3307',
+            'address' => 'localhost@mail.ru',
+            'name' => 'Администратор'
         ]
     ]
 ];

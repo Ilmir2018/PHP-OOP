@@ -13,3 +13,4 @@
             </div>
         </div>
     <? endif; endforeach;?>
+<a href="http://study/order/changedata">Поменять данные</a>

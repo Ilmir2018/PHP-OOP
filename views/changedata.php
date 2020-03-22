@@ -1,7 +1,7 @@
 <div>
     <div>
         <p><b>Изменение пароля</b></p>
-        <p>Уважаемый <?=$firstName . ' ' . $lastName?> введите новый пароль!</p>
+        <p>Уважаемый <?=$first_name . ' ' . $last_name?> введите новый пароль!</p>
     </div>
     <div>
         <form method="post">

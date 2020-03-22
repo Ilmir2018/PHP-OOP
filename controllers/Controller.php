@@ -22,6 +22,7 @@ abstract class Controller
     protected $user;
     protected $product;
     protected $comment;
+    protected $recovery;
 
     public function __construct(IRenderer $renderer)
     {
@@ -33,6 +34,7 @@ abstract class Controller
         $this->user = App::call()->user;
         $this->product = App::call()->product;
         $this->comment = App::call()->comment;
+        $this->recovery = App::call()->recovery;
     }
 
     public function run($action = null) {

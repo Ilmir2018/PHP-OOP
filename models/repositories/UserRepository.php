@@ -35,4 +35,11 @@ class UserRepository extends Repository
             ':first_name' => $first_name, ':last_name' => $last_name, ':email' => $email]);
     }
 
+    public function getData($login)
+    {
+        $table = static::getTableName();
+        $sql = "SELECT * FROM {$table} WHERE login = :login";
+        return static::getDb()->queryOne($sql, [':login' => $login]);
+    }
+
 }

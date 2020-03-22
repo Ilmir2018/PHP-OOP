@@ -5,9 +5,25 @@ namespace app\models\repositories;
 
 
 use app\models\User;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class RecoveryRepository extends Repository
 {
+
+    private $config = [];
+
+    public function __construct($host, $SMTPAuth, $username, $password, $SMTPSecure, $port, $address, $name)
+    {
+        parent::__construct();
+        $this->config['host'] = $host;
+        $this->config['SMTPAuth'] = $SMTPAuth;
+        $this->config['username'] = $username;
+        $this->config['password'] = $password;
+        $this->config['SMTPSecure'] = $SMTPSecure;
+        $this->config['port'] = $port;
+        $this->config['address'] = $address;
+        $this->config['name'] = $name;
+    }
 
     public function getTableName()
     {
@@ -73,6 +89,36 @@ class RecoveryRepository extends Repository
         $mail = mail($emailTo, $subject, $body, $headers, '-f'. $fromMail);
         if ($mail) return true;
         else return false;
+    }
+
+    public function sendSMTPPassword($email, $login, $password)
+    {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = $this->config['host']; // Адрес SMTP сервера
+        $mail->SMTPAuth = $this->config['SMTPAuth'];
+        $mail->Username = $this->config['username'];
+        $mail->Password = $this->config['password'];
+        $mail->SMTPSecure = $this->config['SMTPSecure'];
+        $mail->Port = $this->config['port'];
+
+        $mail->setFrom($this->config['address'], $this->config['na me']);
+        $mail->addAddress($email, $login);
+
+        $mail->Subject = 'Ссылка на обновление пароля.';
+        $mail->msgHTML("<html><body>
+                <h1>Здравствуйте!</h1>
+                <p>В этом письме содержиться временный пароль.</p>
+                <p>Ваш временный пароль - {$password}</p>
+                <p>Напоминаем что вы всегда можете поменять личные данные на странице http://study/order/changedata</p>
+                </html></body>");
+
+        if ($mail->send()) {
+            echo 'Письмо отрпалено';
+        } else {
+            echo 'Ошибка: ' . $mail->ErrorInfo;
+        }
+
     }
 
 
